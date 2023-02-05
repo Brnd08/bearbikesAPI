@@ -1,8 +1,11 @@
 package com.example.bearbikes_react.controller;
 
 import com.example.bearbikes_react.model.Admin;
+import com.example.bearbikes_react.model.Cyclist;
 import com.example.bearbikes_react.repository.AdminsRepository;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 import static com.example.bearbikes_react.utilities.Utils.generateRandomToken;
 
@@ -19,6 +22,12 @@ public class AdminController {
     public int countRegisteredAdmins(){
         return adminsRepository.countAdmins();
     }
+
+    @GetMapping(value = {"/getAll"}, produces="application/json")
+    public List<Admin> getRegisteredAdministrator() {
+        return adminsRepository.getAll();
+    }
+
 
     @PostMapping(value="/register")
     public String registerNewAdmin(

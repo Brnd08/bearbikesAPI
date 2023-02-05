@@ -1,15 +1,39 @@
 package com.example.bearbikes_react.model;
 
+import java.sql.Date;
+
 public class Admin {
     private int id;
     private String email;
     private String password;
     private String nombre;
+    private AccounStatus accounStatus;
+
+    private Date registerDate;
+
+    public Admin() {
+    }
 
     public Admin(String email, String password, String nombre) {
         this.email = email;
         this.password = password;
         this.nombre = nombre;
+    }
+
+    public Date getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public AccounStatus getAccounStatus() {
+        return accounStatus;
+    }
+
+    public void setAccounStatus(AccounStatus accounStatus) {
+        this.accounStatus = accounStatus;
     }
 
     @Override
