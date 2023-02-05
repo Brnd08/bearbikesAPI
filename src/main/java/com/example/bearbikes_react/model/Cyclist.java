@@ -9,6 +9,20 @@ public class Cyclist {
     private String apellidoMat;
     private String numerocelular;
     private String tokenPersonal;
+
+    private AccounStatus accounStatus;
+
+    public AccounStatus getAccounStatus() {
+        return accounStatus;
+    }
+
+    public void setAccounStatus(AccounStatus estadoCuenta) {
+        this.accounStatus = estadoCuenta;
+    }
+
+    public Cyclist(){
+
+    }
     public Cyclist(String email, String password, String nombre, String apellidoPat, String apellidoMat, String numerocelular, String tokenPersonal) {
         this.email = email;
         this.password = password;
