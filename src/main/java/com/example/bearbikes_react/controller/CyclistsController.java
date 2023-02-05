@@ -31,6 +31,7 @@ public class CyclistsController {
             )
     {
         //http://localhost:9000/ciclistas/register?email=email@curl.com&password=constraseña&nombre=curl&apellidoPat=velazquez&apellidoMat=tellez&celular=5533175289
+
         String randomToken = generateRandomToken(30);
         Cyclist newCyclist = new Cyclist(email, password, nombre, apellidoPat, apellidoMat, celular, randomToken);
         System.out.println(newCyclist);
@@ -39,13 +40,5 @@ public class CyclistsController {
         return newCyclist.toString();
 
     }
-
-    /**
-     * Generates a random String Token using by adding random ASCII characters between 48 and 123
-     * @param length an int value indicating the token length
-     * @return a String representation of the token
-     */
-
-
 
 }
