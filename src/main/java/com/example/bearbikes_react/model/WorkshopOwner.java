@@ -9,6 +9,10 @@ public class WorkshopOwner {
     private String apellidoMat;
     private String numerocelular;
     private String rfcFisica;
+    private AccounStatus accounStatus;
+
+    public WorkshopOwner() {
+    }
 
     public WorkshopOwner(String email, String password, String nombre, String apellidoPat, String apellidoMat, String numerocelular, String rfcFisica) {
         this.email = email;
@@ -18,6 +22,14 @@ public class WorkshopOwner {
         this.apellidoMat = apellidoMat;
         this.numerocelular = numerocelular;
         this.rfcFisica = rfcFisica;
+    }
+
+    public AccounStatus getAccounStatus() {
+        return accounStatus;
+    }
+
+    public void setAccounStatus(AccounStatus accounStatus) {
+        this.accounStatus = accounStatus;
     }
 
     @Override

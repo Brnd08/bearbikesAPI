@@ -5,6 +5,8 @@ import com.example.bearbikes_react.model.WorkshopOwner;
 import com.example.bearbikes_react.repository.WorkshopOwnerRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/workshopOwner")
 public class WorkshopOwnerController {
@@ -16,7 +18,12 @@ public class WorkshopOwnerController {
 
     @GetMapping(value={"/count"})
     public int countRegisteredWorkshopOwners(){
-        return workshopOwnerRepository.countWorkshopOwners();
+        return workshopOwnerRepository.count();
+    }
+
+    @GetMapping(value={"/getAll"})
+    public List<WorkshopOwner> getRegisteredWorkshopOwners() {
+        return workshopOwnerRepository.getAll();
     }
 
     @PostMapping(value="/register")
@@ -34,7 +41,7 @@ public class WorkshopOwnerController {
         WorkshopOwner newWorkshopOwner = new WorkshopOwner(email, password, nombre, apellidoPat, apellidoMat, celular, rfc);
         System.out.println(newWorkshopOwner);
 
-        workshopOwnerRepository.addWorkshopOwner(newWorkshopOwner);
+        workshopOwnerRepository.addNew(newWorkshopOwner);
         return newWorkshopOwner.toString();
 
     }
