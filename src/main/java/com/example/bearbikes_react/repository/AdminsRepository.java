@@ -45,7 +45,7 @@ public class AdminsRepository {
      * Makes a query to the database to count the registered admins
      * @return the number of admins in the database
      */
-    public int countAdmins(){
+    public int count(){
         String countUsersQuery = "SELECT COUNT(*) FROM administradores";
         return jdbcTemplate.queryForObject(countUsersQuery, Integer.class);
     }
@@ -66,7 +66,7 @@ public class AdminsRepository {
      * @param newAdmin Ciclist object to insert
      * @return the id of the new Ciclist in the database, or -1 if an exception happened
      */
-    public int addAdmin(Admin newAdmin){
+    public int addNew(Admin newAdmin){
         SimpleJdbcCall addUserProcedureCall
                 = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("insertar_admin")

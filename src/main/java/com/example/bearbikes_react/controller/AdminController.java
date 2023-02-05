@@ -20,7 +20,7 @@ public class AdminController {
 
     @GetMapping(value={"/count"})
     public int countRegisteredAdmins(){
-        return adminsRepository.countAdmins();
+        return adminsRepository.count();
     }
 
     @GetMapping(value = {"/getAll"}, produces="application/json")
@@ -40,7 +40,7 @@ public class AdminController {
         Admin newAdmin = new Admin(email, password, nombre);
         System.out.println(newAdmin);
 
-        adminsRepository.addAdmin(newAdmin);
+        adminsRepository.addNew(newAdmin);
         return newAdmin.toString();
     }
 
