@@ -94,11 +94,11 @@ public class WorkshopOwnerRepository {
         newWorkshopOwner.setId(insertedWorkshopOwnerId);
         return insertedWorkshopOwnerId;
     }
+    
     /**
      * RowMapper implementation for map resulting select queries for WorshopOwners using the SELECT_WORKSHOP_OWNER_QUERY String
      * of WorshopOwnerRepository class
      */
-
     class WorkshopOwnerMapper implements RowMapper<WorkshopOwner> {
         public WorkshopOwner mapRow(ResultSet rs, int rowNum) throws SQLException {
             WorkshopOwner workshopOwner = new WorkshopOwner();

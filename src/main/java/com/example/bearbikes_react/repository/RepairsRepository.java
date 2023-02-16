@@ -88,7 +88,7 @@ public class RepairsRepository {
             repair.setIdCiclista(rs.getInt("id_ciclista"));
             repair.setInicio(rs.getDate("fecha_inicio"));
             repair.setEstado(rs.getString("estado_reparacion"));
-            repair.setTipo(rs.getString("tipo_repacion"));
+            repair.setTipo(rs.getString("tipo_reparacion"));
             repair.setFinalizacionEstimada(rs.getDate("fecha_estimada"));
             return repair;
         }

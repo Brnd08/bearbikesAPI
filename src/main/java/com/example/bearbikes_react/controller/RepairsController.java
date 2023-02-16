@@ -35,7 +35,7 @@ public class RepairsController {
             @RequestParam("tipo")String tipo
             )
     {
-        //http://localhost:9000/repairs/register?idDueño=2&idTaller=1&idCiclista=1&tipo=cambioRin
+        // http://localhost:9000/repairs/register?idDueño=2&idTaller=1&idCiclista=1&tipo=cambioRin
         Repair newRepair = new Repair(idDueño, idCiclista, idTaller, tipo);
         System.out.println(newRepair);
 

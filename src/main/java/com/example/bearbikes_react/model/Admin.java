@@ -18,6 +18,7 @@ public class Admin {
         this.email = email;
         this.password = password;
         this.nombre = nombre;
+        this.accounStatus = AccounStatus.ACTIVA;
     }
 
     public Date getRegisterDate() {

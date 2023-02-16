@@ -1,47 +1,55 @@
 package com.example.bearbikes_react.controller;
 
 import com.example.bearbikes_react.model.Admin;
-import com.example.bearbikes_react.model.Cyclist;
 import com.example.bearbikes_react.repository.AdminsRepository;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
-import static com.example.bearbikes_react.utilities.Utils.generateRandomToken;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/admins")
 public class AdminController {
+
     private final AdminsRepository adminsRepository;
 
-    public AdminController(AdminsRepository adminsRepository){
+    public AdminController(AdminsRepository adminsRepository) {
         this.adminsRepository = adminsRepository;
     }
 
-    @GetMapping(value={"/count"})
-    public int countRegisteredAdmins(){
-        return adminsRepository.count();
+    @GetMapping(value = {"/count"})
+    public ResponseEntity<Integer> countRegisteredAdmins() {
+        try{
+            return new ResponseEntity(adminsRepository, HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
     }
 
-    @GetMapping(value = {"/getAll"}, produces="application/json")
-    public List<Admin> getRegisteredAdministrator() {
-        return adminsRepository.getAll();
+    @GetMapping(value = {"/getAll"}, produces = "application/json")
+    public ResponseEntity<List<Admin>> getRegisteredAdministrator() {
+        try{
+            return new ResponseEntity(adminsRepository.getAll(), HttpStatus.OK);
+        }catch(Exception e){
+            return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
+        }
     }
 
+    @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Admin> registerNewAdmin(
+            @RequestParam(value = "adminKey") String clave, // despues encriptar mientras el profe no sabe ni que es rest
+            @RequestBody Admin newAdmin
+    ) {
+        // http://localhost:9000/admins/register?adminKey=kkadsfkldfsh
 
-    @PostMapping(value="/register")
-    public String registerNewAdmin(
-            @RequestParam("email")String email,
-            @RequestParam("password")String password,
-            @RequestParam("nombre")String nombre
-            )
-    {
-        // http://localhost:9000/admins/register?email=emailAdmin@curl.com&password=constraseña&nombre=adminCurl
-        Admin newAdmin = new Admin(email, password, nombre);
-        System.out.println(newAdmin);
+        try {
+            adminsRepository.addNew(newAdmin, clave);
+            return new ResponseEntity(newAdmin, HttpStatus.OK);
 
-        adminsRepository.addNew(newAdmin);
-        return newAdmin.toString();
+        } catch (Exception e) {
+            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
+    
 
 }

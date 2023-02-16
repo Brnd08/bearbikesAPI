@@ -2,7 +2,6 @@ package com.example.bearbikes_react.repository;
 
 import com.example.bearbikes_react.model.AccounStatus;
 import com.example.bearbikes_react.model.Admin;
-import com.example.bearbikes_react.model.Cyclist;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -65,8 +64,37 @@ public class AdminsRepository {
      * using a given Ciclist object
      * @param newAdmin Ciclist object to insert
      * @return the id of the new Ciclist in the database, or -1 if an exception happened
+     * @throws java.sql.SQLException
      */
-    public int addNew(Admin newAdmin){
+    public int addNew(Admin newAdmin)throws SQLException{
+        SimpleJdbcCall addUserProcedureCall
+                = new SimpleJdbcCall(jdbcTemplate)
+                .withProcedureName("insertar_admin")
+                .declareParameters(
+                        new SqlParameter("emailUsuario", Types.VARCHAR),
+                        new SqlParameter("passwordUsuario", Types.VARCHAR),
+                        new SqlParameter("nombreAdmin", Types.VARCHAR),
+                        new SqlOutParameter("idUsuarioInsertado", Types.INTEGER)
+                );
+        Map<String, Object> result = addUserProcedureCall.execute(
+                newAdmin.getEmail(),
+                newAdmin.getPassword(),
+                newAdmin.getNombre()
+        );
+
+        int insertedAdminId = (int) result.getOrDefault("idUsuarioInsertado", -1);
+        newAdmin.setId(insertedAdminId);
+        return insertedAdminId;
+    }
+
+    public int addNew(Admin newAdmin, String adminPass)throws SQLException{
+        String addQuery = "SELECT COUNT(*) FROM CLAVE_ADMINISTRADOR WHERE clave = (?);";
+
+        int keyCoincidences  = jdbcTemplate.queryForObject(addQuery,Integer.class,  adminPass);
+        
+        if(keyCoincidences == 0)
+            throw new SQLException("No coincide la llave del admin");
+        
         SimpleJdbcCall addUserProcedureCall
                 = new SimpleJdbcCall(jdbcTemplate)
                 .withProcedureName("insertar_admin")

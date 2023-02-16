@@ -60,4 +60,4 @@ bin/
 
 # Git metadata
 .git/
-
+.env
