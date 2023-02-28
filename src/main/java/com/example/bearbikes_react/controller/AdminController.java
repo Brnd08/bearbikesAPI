@@ -20,18 +20,18 @@ public class AdminController {
 
     @GetMapping(value = {"/count"})
     public ResponseEntity<Integer> countRegisteredAdmins() {
-        try{
+        try {
             return new ResponseEntity(adminsRepository.count(), HttpStatus.OK);
-        }catch(Exception e){
+        } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
 
     @GetMapping(value = {"/getAll"}, produces = "application/json")
     public ResponseEntity<List<Admin>> getRegisteredAdministrator() {
-        try{
+        try {
             return new ResponseEntity(adminsRepository.getAll(), HttpStatus.OK);
-        }catch(Exception e){
+        } catch (Exception e) {
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
     }
@@ -44,14 +44,17 @@ public class AdminController {
         // http://localhost:9000/admins/register?adminKey=kkadsfkldfsh
 
         try {
-            adminsRepository.addNew(newAdmin, clave);
-            return new ResponseEntity(newAdmin, HttpStatus.OK);
+            int addedAdminId = adminsRepository.addNew(newAdmin, clave);
+            if (addedAdminId != -1) {
+                return new ResponseEntity(adminsRepository.getById(addedAdminId), HttpStatus.OK);
+            } else {
+                throw new Exception("Ocurrio un problema al añadirlo");
+            }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return new ResponseEntity(e,HttpStatus.OK);
+            return new ResponseEntity(e, HttpStatus.OK);
         }
     }
-    
 
 }

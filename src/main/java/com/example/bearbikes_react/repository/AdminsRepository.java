@@ -21,7 +21,9 @@ import java.util.Map;
 public class AdminsRepository {
     private final JdbcTemplate jdbcTemplate;
 
-    private static final String SELECT_ADMINISTRATORS_QUERY;
+    private static final String SELECT_ADMINISTRATORS_QUERY;    
+    private static final String SELECT_ADMINISTRATORS_BY_ID_QUERY;
+
 
     static {
         SELECT_ADMINISTRATORS_QUERY = "SELECT " +
@@ -29,6 +31,12 @@ public class AdminsRepository {
                 "administradores.nombre_admin AS nombre, administradores.fecha_registro " +
                 "FROM usuarios, administradores " +
                 "WHERE usuarios.id_usuario = administradores.id_admin;";
+        
+        SELECT_ADMINISTRATORS_BY_ID_QUERY = "SELECT " +
+                "usuarios.id_usuario AS id, usuarios.email_usuario AS email, usuarios.password_usuario AS password, usuarios.account_status, " +
+                "administradores.nombre_admin AS nombre, administradores.fecha_registro " +
+                "FROM usuarios, administradores " +
+                "WHERE usuarios.id_usuario = administradores.id_admin and usuarios.id_usuario = (?);";
     }
 
     @Autowired
@@ -57,7 +65,11 @@ public class AdminsRepository {
     public List<Admin> getAll(){
         return jdbcTemplate.query(SELECT_ADMINISTRATORS_QUERY, new AdminsRepository.AdminMapper());
     }
-
+    
+        public Admin getById(int idUsuario){
+        return jdbcTemplate.queryForObject(SELECT_ADMINISTRATORS_BY_ID_QUERY,new AdminsRepository.AdminMapper(), idUsuario);
+    }
+        
 
     /**
      * Makes a call to a stored procedure in the database in order to add a new row in the administradores table
