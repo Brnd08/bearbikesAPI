@@ -21,7 +21,7 @@ public class AdminController {
     @GetMapping(value = {"/count"})
     public ResponseEntity<Integer> countRegisteredAdmins() {
         try{
-            return new ResponseEntity(adminsRepository, HttpStatus.OK);
+            return new ResponseEntity(adminsRepository.count(), HttpStatus.OK);
         }catch(Exception e){
             return new ResponseEntity(e, HttpStatus.BAD_REQUEST);
         }
