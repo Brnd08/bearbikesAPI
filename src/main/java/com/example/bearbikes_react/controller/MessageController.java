@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/message")
+@CrossOrigin()
 public class MessageController {
     private final RepairsRepository repairsRepository;
 

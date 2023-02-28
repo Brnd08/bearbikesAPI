@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/repairs")
+@CrossOrigin()
 public class RepairsController {
     private final RepairsRepository repairsRepository;
 

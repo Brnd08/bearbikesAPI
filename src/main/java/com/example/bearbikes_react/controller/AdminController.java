@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping("/admins")
+@CrossOrigin()
 public class AdminController {
 
     private final AdminsRepository adminsRepository;
@@ -36,7 +37,7 @@ public class AdminController {
     }
 
     @PostMapping(value = "/register", consumes = "application/json", produces = "application/json")
-    public ResponseEntity<Admin> registerNewAdmin(
+    public ResponseEntity<?> registerNewAdmin(
             @RequestParam(value = "adminKey") String clave, // despues encriptar mientras el profe no sabe ni que es rest
             @RequestBody Admin newAdmin
     ) {
@@ -47,7 +48,8 @@ public class AdminController {
             return new ResponseEntity(newAdmin, HttpStatus.OK);
 
         } catch (Exception e) {
-            return new ResponseEntity(e.getMessage(), HttpStatus.BAD_REQUEST);
+            System.out.println(e.getMessage());
+            return new ResponseEntity(e,HttpStatus.OK);
         }
     }
     

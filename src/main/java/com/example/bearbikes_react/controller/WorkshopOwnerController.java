@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/workshopOwner")
+@CrossOrigin()
 public class WorkshopOwnerController {
     private final WorkshopOwnerRepository workshopOwnerRepository;
 

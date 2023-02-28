@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("chat/{idChat}")
+@CrossOrigin()
 public class ChatController {
     private final RepairsRepository repairsRepository;
 

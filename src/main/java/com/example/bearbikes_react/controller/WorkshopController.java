@@ -10,6 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/workshop")
+@CrossOrigin()
 public class WorkshopController {
     private final WorkshopRepository workshopRepository;
 

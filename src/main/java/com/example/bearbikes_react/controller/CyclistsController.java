@@ -10,6 +10,7 @@ import static com.example.bearbikes_react.utilities.Utils.generateRandomToken;
 
 @RestController
 @RequestMapping("/ciclistas")
+@CrossOrigin()
 public class CyclistsController {
     private final CyclistsRepository cyclistsRepository;
 

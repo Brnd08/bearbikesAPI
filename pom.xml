@@ -39,17 +39,17 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <!-- Spring boot security libraries -->
+<!--         Spring boot security libraries 
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
-        <!-- JsonWebToken Library to implement authentication -->
+         JsonWebToken Library to implement authentication 
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
             <version>0.9.1</version>
-        </dependency>
+        </dependency>-->
         <!-- Support for .env files  -->
         <dependency>
             <groupId>me.paulschwarz</groupId>
